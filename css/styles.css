@@ -423,18 +423,99 @@ section{ padding: 80px 0; }
 .process-step p{ color: rgba(255,255,255,.68); font-size: .92rem; margin:0; }
 
 /* ---------- Aliados ---------- */
-.allies-row{
+.allies-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  align-items:center;
+  gap: 56px;
+  padding: 68px 0;
+}
+.allies-info h2{
+  margin: 14px 0 16px;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.12;
+  border:0;
+  padding:0;
+}
+.allies-info > p{
+  margin: 0 0 22px;
+  color: var(--steel-soft);
+  font-size: .95rem;
+}
+.allies-stats{
+  display:flex;
+  gap: 34px;
+  padding: 20px 0;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.ally-stat strong{
+  display:block;
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.ally-stat span{
+  display:block;
+  font-size: .78rem;
+  line-height: 1.35;
+  color: var(--steel-soft);
+  max-width: 16ch;
+}
+
+.allies-viewport{
+  --allies-speed: 26s;
+  display:flex;
+  align-items:stretch;
+  gap: 28px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.allies-track{
+  display:flex;
+  align-items:stretch;
+  gap: 28px;
+  margin:0;
+  padding:0;
+  list-style:none;
+  flex: 0 0 auto;
+  animation: allies-scroll var(--allies-speed) linear infinite;
+}
+.allies-viewport:hover .allies-track{ animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce){
+  .allies-track{ animation-duration: var(--allies-speed) !important; }
+}
+
+.ally-card{
   display:flex;
   align-items:center;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-  padding: 30px 0;
+  justify-content:center;
+  width: 300px;
+  flex: 0 0 auto;
+  padding: 40px 44px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--red);
 }
-.allies-row .ally-logo{
-  height: 42px;
+.ally-card .ally-logo{
   width: auto;
-  opacity: .9;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: .95;
+}
+.ally-logo--car{ height: 130px; }
+.ally-logo--gua{ height: 52px; }
+.ally-logo--fed{ height: 88px; }
+
+@keyframes allies-scroll{
+  from{ transform: translate3d(0, 0, 0); }
+  to  { transform: translate3d(calc(-100% - 28px), 0, 0); }
 }
 
 /* ---------- Tarjetas genéricas ---------- */
@@ -692,7 +773,9 @@ section{ padding: 80px 0; }
   .form-grid{ grid-template-columns: 1fr; }
   .doc-grid{ grid-template-columns: 1fr 1fr; gap: 14px; }
   .footer-grid{ grid-template-columns: 1fr; gap: 36px; }
-  .allies-row{ justify-content: center; gap: 32px 40px; }
+  .allies-grid{ grid-template-columns: 1fr; gap: 34px; padding: 48px 0; }
+  .allies-info .btn{ width: 100%; }
+  .allies-stats{ gap: 24px; }
 }
 
 @media (max-width: 560px){
